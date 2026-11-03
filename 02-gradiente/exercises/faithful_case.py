@@ -60,7 +60,7 @@ if __name__ == "__main__":
     centred = [x - mean for x in DURATION]
     m_c, n_c = exact(centred)
     print(f"-- centred durations (minus their mean, {mean:.2f} min) --")
-    print(f"best line: wait = {m_c:.2f} · (duration − {mean:.2f}) + {n_c:.2f}")
+    print(f"best line: wait = {m_c:.2f} · (duration - {mean:.2f}) + {n_c:.2f}")
     for eta in (0.1, 0.5, 0.7):
         steps = steps_to_arrive(eta, centred)
         print(f"eta = {eta}: " + (f"{steps} steps" if steps else "explodes"))
