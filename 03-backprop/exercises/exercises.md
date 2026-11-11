@@ -1,6 +1,6 @@
 # La retropropagación con datos reales
 
-Material del vídeo [«Backpropagation a mano»](https://youtu.be/bUF-Lvocx38). Python puro, sin
+Material del vídeo [«Backpropagation a mano»](https://youtu.be/1kulqkL0Gxs). Python puro, sin
 instalar nada.
 
 ## El caso: las flores que el perceptrón no podía separar

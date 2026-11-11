@@ -89,31 +89,51 @@ def train(p, eta=1.0, epochs=20000, tolerance=0.1, checkpoints=()):
 def table(p):
     for x, y in zip(X, Y):
         a = forward(p, x)
-        print(f"  {x} -> h1={a['h1']:.2f} h2={a['h2']:.2f} output={a['s']:.3f} (target {y})")
+        error = (a["s"] - y) ** 2
+        print(f"  {x} -> h1={a['h1']:.2f} h2={a['h2']:.2f} output={a['s']:.3f} (target {y})  squared error={error:.3f}")
 
 
 if __name__ == "__main__":
+    print("== The sigmoid ==")
+    print(f"  e = {math.e:.3f}   e^5 = {math.exp(5):.0f}   e^-5 = {math.exp(-5):.3f}")
+    print(
+        f"  sigma(0) = 1 / (1 + e^0) = {sigmoid(0):.1f}   sigma'(0) = 0.5 * 0.5 = {sigmoid(0) * (1 - sigmoid(0)):.2f}"
+    )
+    print(f"  e^-0.9 = {math.exp(-0.9):.3f}   sigma(0.9) = 1 / {1 + math.exp(-0.9):.3f} = {sigmoid(0.9):.3f}")
+
     p = INITIAL
-    print("== Before training ==")
+    print("\n== Before training ==")
     table(p)
-    print(f"  MSE: {mse(p):.3f}")
+    total = sum((forward(p, x)["s"] - y) ** 2 for x, y in zip(X, Y))
+    print(f"  Sum of squared errors: {total:.4f}   MSE = {total:.4f} / 4 = {mse(p):.3f}")
 
     print("\n== By hand: example (1, 0), target 1 ==")
     x, y = (1, 0), 1
     a, d, g = backward(p, x, y)
     print(f"  z1 = {a['z1']:.2f} -> h1 = {a['h1']:.3f}")
     print(f"  z2 = {a['z2']:.2f} -> h2 = {a['h2']:.3f}")
-    print(f"  zs = {a['zs']:.3f} -> output = {a['s']:.3f}   error = {(a['s'] - y) ** 2:.3f}")
+    print(f"  zs = v1*h1 + v2*h2 + c = {p['v1'] * a['h1']:.4f} {p['v2'] * a['h2']:+.4f} {p['c']:+.1f} = {a['zs']:.3f}")
+    print(f"  output = sigma({a['zs']:.3f}) = {a['s']:.3f}   error = {(a['s'] - y) ** 2:.3f}")
     print(f"  dE/ds = {d['dE_ds']:.3f}   delta_s = {d['ds']:.3f}")
+    slope_s = a["s"] * (1 - a["s"])
+    print(
+        f"  gears for v1: h1 {a['h1']:.3f} x sigma'(zs) {slope_s:.3f} x dE/ds {d['dE_ds']:.3f} = {a['h1'] * slope_s * d['dE_ds']:.3f}"
+    )
+    print(f"  sigma'(z1) = h1 * (1 - h1) = {a['h1']:.3f} * {1 - a['h1']:.3f} = {a['h1'] * (1 - a['h1']):.3f}")
+    print(f"  sigma'(z2) = h2 * (1 - h2) = {a['h2']:.3f} * {1 - a['h2']:.3f} = {a['h2'] * (1 - a['h2']):.3f}")
     print(f"  delta_1 = {d['d1']:.4f}   delta_2 = {d['d2']:.4f}")
     for k in ("v1", "v2", "c", "w11", "w12", "b1", "w21", "w22", "b2"):
         print(f"  dE/d{k} = {g[k]:+.4f}")
     eta = 1.0
     p1 = {k: p[k] - eta * g[k] for k in p}
+    print(
+        f"  v1: {p['v1']} - {eta} * ({g['v1']:.4f}) = {p1['v1']:.4f}   v2: {p['v2']} - {eta} * ({g['v2']:.4f}) = {p1['v2']:.4f}"
+    )
+    print(f"  w11: {p['w11']} - {eta} * ({g['w11']:.4f}) = {p1['w11']:.4f}")
     print(f"  One step (eta={eta}) with this example only: output {a['s']:.3f} -> {forward(p1, x)['s']:.3f}")
 
     print("\n== Training with the four examples (eta = 1) ==")
-    final, epochs, history = train(p, eta=1.0, checkpoints=(1, 10, 100, 300, 500, 1000))
+    final, epochs, history = train(p, eta=1.0, checkpoints=(1, 10, 100, 150, 200, 300, 500, 1000))
     for e, v in history.items():
         print(f"  epoch {e:>5}: MSE {v:.4f}")
     print(f"  Solved in {epochs} epochs")

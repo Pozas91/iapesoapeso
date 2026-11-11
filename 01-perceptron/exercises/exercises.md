@@ -1,6 +1,6 @@
 # El perceptrón con datos reales
 
-Material del vídeo [«El perceptrón»](https://youtu.be/qbiq5pwEATQ). Python puro, sin instalar nada.
+Material del vídeo [«El perceptrón»](https://youtu.be/i7NhgM_WyL8). Python puro, sin instalar nada.
 
 ## El caso: las flores de Iris
 

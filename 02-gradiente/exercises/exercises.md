@@ -1,6 +1,6 @@
 # El descenso de gradiente con datos reales
 
-Material del vídeo [«El descenso de gradiente»](https://youtu.be/vpqFrEKVIig). Python puro, sin
+Material del vídeo [«El descenso de gradiente»](https://youtu.be/ITaBkr4OXkY). Python puro, sin
 instalar nada.
 
 ## El caso: el géiser Old Faithful
