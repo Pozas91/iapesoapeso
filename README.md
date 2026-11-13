@@ -10,6 +10,7 @@ aparece en pantalla. Ejecútalo, cambia los números y mira qué pasa.
 | 03 · Backpropagation a mano: así aprende una red neuronal | [`03-backprop`](03-backprop) |
 | 04 · 04 · Funciones de activación: por qué las redes profundas no aprendían | [`04-activacion`](04-activacion) |
 | 05 · 05 · Softmax y entropía cruzada: el número que ChatGPT intenta bajar | [`05-entropia`](05-entropia) |
+| sh · El número que ChatGPT intenta bajar | [`short-05-1-entropia`](short-05-1-entropia) |
 
 ## Cómo ejecutarlo
 
