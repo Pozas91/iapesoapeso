@@ -1,0 +1,55 @@
+{
+  "run_at": "2026-11-18T17:43:49+01:00",
+  "model": "claude-opus-5-5",
+  "question": "¿Qué tiempo hace ahora mismo en Madrid?",
+  "system": "Respondes en español, en una o dos frases. No sabes el tiempo actual de ningún sitio salvo por la herramienta.",
+  "tools": [
+    {
+      "name": "tiempo",
+      "description": "Devuelve la temperatura y el estado del cielo ahora mismo en una ciudad.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "ciudad": {
+            "type": "string",
+            "description": "Nombre de la ciudad"
+          }
+        },
+        "required": [
+          "ciudad"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "steps": [
+    {
+      "call": 1,
+      "stop_reason": "tool_use",
+      "model_text": "",
+      "usage": {
+        "input_tokens": 485,
+        "output_tokens": 54
+      },
+      "tool_requests": [
+        {
+          "name": "tiempo",
+          "input": {
+            "ciudad": "Madrid"
+          },
+          "result": "Madrid: 15.2 °C, lluvia débil (2026-11-18T17:30 hora local)"
+        }
+      ]
+    },
+    {
+      "call": 2,
+      "stop_reason": "end_turn",
+      "model_text": "En Madrid ahora hay 15,2 °C con lluvia débil, así que mejor llevar paraguas si vas a salir.",
+      "usage": {
+        "input_tokens": 579,
+        "output_tokens": 46
+      }
+    }
+  ]
+}
