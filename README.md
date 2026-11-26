@@ -11,6 +11,7 @@ aparece en pantalla. Ejecútalo, cambia los números y mira qué pasa.
 | 04 · 04 · Funciones de activación: por qué las redes profundas no aprendían | [`04-activacion`](04-activacion) |
 | 05 · 05 · Softmax y entropía cruzada: el número que ChatGPT intenta bajar | [`05-entropia`](05-entropia) |
 | 06 · 06 · Regresión logística: la neurona que da probabilidades | [`06-regresion-logistica`](06-regresion-logistica) |
+| 07 · 07 · La campana de Gauss: media, varianza y por qué casi todo acaba en campana | [`07-campana`](07-campana) |
 | sh · Cómo usa herramientas una IA que solo sabe escribir texto | [`short-app01-1-react`](short-app01-1-react) |
 | sh · El número que ChatGPT intenta bajar | [`short-05-1-entropia`](short-05-1-entropia) |
 
